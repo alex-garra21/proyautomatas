@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Autómata de Pila Animado</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="institucional">
+      <div class="institucional-header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Escudo_de_la_universidad_Mariano_G%C3%A1lvez_Guatemala.svg" alt="Logo Universidad Mariano Gálvez" class="umg-logo">
+        <div class="institucional-texto">
+          <h2>UNIVERSIDAD MARIANO GÁLVEZ DE GUATEMALA</h2>
+          <h3>FACULTAD DE INGENIERÍA EN SISTEMAS</h3>
+          <p><strong>INGENIERO:</strong> HECTOR A. MACZ</p>
+          <p><strong>CURSO:</strong> AUTÓMATAS Y LENGUAJES FORMALES</p>
+          <p><strong>CICLO:</strong> VI</p>
+          <p><strong>PROYECTO:</strong> Simulación de máquinas abstractas en entorno web — Autómatas con pila (PDA)</p>
+          <p><strong>Ejercicio:</strong> 1. L = { 1* 0^n 1^m 1^{2n} 0^m | n ≥ 1, m ≥ 1 }</p>
+          <p><strong>ALUMNO:</strong> Steven Gianni Alexander Reyes Riveiro &nbsp;&nbsp; <strong>CARNÉ No.:</strong> 0902-22-20698</p>
+          <p><strong>Lugar y fecha:</strong> Cobán, Alta Verapaz, 07 de noviembre del 2025</p>
+        </div>
+      </div>
+    </div>
+
+    <h1>Simulador de Autómata de Pila (PDA)</h1>
+
+    <div class="panel">
+      <div class="entrada">
+        <label>Ingrese la cadena (w):</label>
+        <input type="text" id="cadena" placeholder="Ejemplo: 10011111100">
+        <button onclick="evaluarCadena()">Evaluar</button>
+      </div>
+      <div id="resultado"></div>
+    </div>
+
+    <div class="descripcion">
+      <h3>📘 Descripción formal del Autómata (Séptupla)</h3>
+      <p>
+        <strong>M = (Q, Σ, Γ, δ, q0, Z, F)</strong><br>
+        Q = {q0, q1, q2, q3, q4, qf}<br>
+        Σ = {0, 1}<br>
+        Γ = {A, B, Z}<br>
+        q0 = Estado inicial<br>
+        Z = Símbolo inicial de la pila<br>
+        F = {qf}
+      </p>
+      <h4>Tabla de Transiciones δ:</h4>
+      <table class="tabla-trans">
+        <tr><th>Estado</th><th>Entrada</th><th>Tope Pila</th><th>Acción</th><th>Nuevo estado</th></tr>
+        <tr><td>q0</td><td>1</td><td>Z/A/B</td><td>$\lambda$</td><td>q0</td></tr>
+        <tr><td>q0</td><td>0</td><td>Z/A/B</td><td>Push(A)</td><td>q1</td></tr>
+        <tr><td>q1</td><td>0</td><td>A/Z</td><td>Push(A)</td><td>q1</td></tr>
+        <tr><td>q1</td><td>1</td><td>A/Z</td><td>Push(B)</td><td>q2</td></tr>
+        <tr><td>q2</td><td>1</td><td>B/Z</td><td>Push(B)</td><td>q2</td></tr>
+        <tr><td>q2</td><td>1</td><td>B/Z</td><td>$\lambda$</td><td>q3</td></tr>
+        <tr><td>q3</td><td>11</td><td>A</td><td>Pop(A)</td><td>q3</td></tr>
+        <tr><td>q3</td><td>0</td><td>B</td><td>Pop(B)</td><td>q4</td></tr>
+        <tr><td>q4</td><td>0</td><td>B</td><td>Pop(B)</td><td>q4</td></tr>
+        <tr><td>q4</td><td>$\lambda$</td><td>Z</td><td>$\lambda$</td><td>qf</td></tr>
+      </table>
+    </div>
+
+    <div class="contenido">
+      <div class="grafo">
+        <svg id="automata" width="1000" height="300">
+          <defs>
+            <marker id="flecha" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L9,3 z" fill="#000"></path>
+            </marker>
+          </defs>
+
+          <line x1="10" y1="150" x2="50" y2="150" stroke="#000" stroke-width="2" marker-end="url(#flecha)" />
+
+          <circle id="q0" class="estado" cx="80" cy="150" r="30"></circle>
+          <circle id="q1" class="estado" cx="250" cy="150" r="30"></circle>
+          <circle id="q2" class="estado" cx="420" cy="150" r="30"></circle>
+          <circle id="q3" class="estado" cx="600" cy="150" r="30"></circle>
+          <circle id="q4" class="estado" cx="780" cy="150" r="30"></circle>
+          <circle id="qf" class="estado final" cx="950" cy="150" r="30"></circle>
+          <circle id="qf-inner" cx="950" cy="150" r="22" stroke="black" stroke-width="2" fill="none"></circle>
+
+          <text x="70" y="155">q0</text>
+          <text x="240" y="155">q1</text>
+          <text x="410" y="155">q2</text>
+          <text x="590" y="155">q3</text>
+          <text x="770" y="155">q4</text>
+          <text x="940" y="155">qf</text>
+
+          <path id="t0" d="M 110 150 Q 160 80 240 120" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
+          <text x="155" y="90">0,λ;A</text>
+          
+          <path id="t1" d="M 280 150 Q 335 80 410 120" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
+          <text x="320" y="90">1,λ;B</text>
+
+          <path id="t2" d="M 450 150 Q 520 80 590 120" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
+          <text x="505" y="90">1,λ;λ</text>
+          
+          <path id="t3" d="M 630 150 Q 710 80 780 120" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
+          <text x="690" y="90">0,B;λ</text>
+
+          <path id="t4" d="M 810 150 Q 860 80 940 120" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
+          <text x="870" y="90">λ,Z;λ</text>
+
+          <path id="b0" d="M 80 120 A 25 25 0 1 1 81 119" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
+          <text x="45" y="80">1,λ;λ</text>
+
+          <path id="b1" d="M 250 120 A 25 25 0 1 1 251 119" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
+          <text x="215" y="80">0,λ;A</text>
+
+          <path id="b2" d="M 420 120 A 25 25 0 1 1 421 119" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
+          <text x="385" y="80">1,λ;B</text>
+
+          <path id="b3" d="M 600 120 A 25 25 0 1 1 601 119" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
+          <text x="560" y="80">11,A;λ</text>
+
+          <path id="b4" d="M 780 120 A 25 25 0 1 1 781 119" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
+          <text x="740" y="80">0,B;λ</text>
+
+          </svg>
+      </div>
+
+      <div class="pila-container">
+        <h3>Pila</h3>
+        <div id="pilaAnimada"></div>
+      </div>
+    </div>
+
+    <div id="di"></div>
+  </div>
+
+  <div class="circuit-container">
+    <div class="circuit-node node1"></div>
+    <div class="circuit-node node2"></div>
+    <div class="circuit-node node3"></div>
+    <div class="circuit-node node4"></div>
+    <div class="circuit-node node5"></div>
+    <div class="circuit-node node6"></div>
+    <div class="circuit-node node7"></div>
+    <div class="circuit-node node8"></div>
+    <div class="circuit-node node9"></div>
+    <div class="circuit-node node10"></div>
+    <div class="circuit-node node11"></div>
+    <div class="circuit-node node12"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

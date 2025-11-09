@@ -1,45 +1,33 @@
-/* ============================================== */
-/* === 1. Base y Colores (Inspiración RASTERINO / Agente IA) === */
-/* ============================================== */
 
-/* Paleta:
-   - Primario: Azul Vibrante (#0066cc)
-   - Secundario: Azul Oscuro (#003366)
-   - Fondo de página: Blanco o Azul muy claro (body)
-   - Fondo de Contenido: Blanco (#ffffff)
-*/
+/* 1. BASE Y CONTENEDORES (ESCRITORIO) */
 
 body {
-  /* Eliminamos el fondo futurista complejo y optamos por un fondo base limpio y claro */
-  display: flex;
-  justify-content: center;
-  align-items: flex-start; /* Alineamos arriba */
-  min-height: 100vh;
-  margin: 0;
-  position: relative;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: #f0f8ff; /* Azul muy claro para la base */
-  color: #333; /* Texto oscuro para contraste */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #f0f8ff;
+    color: #333;
 }
 
-/* Contenedor principal para centrar el contenido */
 .container {
     width: 95%;
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #ffffff; /* Contenido principal blanco */
+    background-color: #ffffff;
     border-radius: 12px;
-    /* Sombra suave y limpia como en la captura */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
     transition: box-shadow 0.3s ease;
 }
 
-/* Estilo para los títulos */
 h1, h2, h3 {
-    color: #0066cc; /* Azul vibrante */
+    color: #0066cc;
     text-align: center;
     margin-top: 0;
 }
@@ -51,14 +39,13 @@ h1, h2, h3 {
     align-items: center;
     padding: 15px;
     border-radius: 8px;
-    background-color: #f7f9fc; /* Ligero gris/azul para diferenciar la sección */
+    background-color: #f7f9fc;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
     margin-bottom: 20px;
 }
 
 .entrada {
     display: flex;
-    flex-grow: 1;
     gap: 10px;
     align-items: center;
 }
@@ -69,12 +56,6 @@ h1, h2, h3 {
     border: 1px solid #ccc;
     border-radius: 6px;
     transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-#cadena:focus {
-    border-color: #0066cc;
-    box-shadow: 0 0 5px rgba(0, 102, 204, 0.5);
-    outline: none;
 }
 
 button {
@@ -88,15 +69,6 @@ button {
     transition: background-color 0.3s ease, transform 0.1s;
 }
 
-button:hover {
-    background-color: #004c99;
-}
-
-button:active {
-    transform: scale(0.98);
-}
-
-/* Contenedor de resultado */
 #resultado {
     font-weight: 600;
     padding: 10px;
@@ -106,27 +78,26 @@ button:active {
 }
 
 /* Descripción Formal y Tablas */
-.descripcion {
-    padding: 20px;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    background-color: #fcfcfc;
+.tabla-scroll-wrapper {
+    overflow-x: auto;
 }
 
 .tabla-trans {
+    min-width: 600px;
     width: 100%;
     border-collapse: collapse;
     margin-top: 15px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
     border-radius: 8px;
-    overflow: hidden; /* Asegura que los bordes redondeados funcionen con las celdas */
+    overflow: hidden;
 }
 
 .tabla-trans th, .tabla-trans td {
     padding: 10px;
     text-align: center;
     border: 1px solid #e9ecef;
+    word-break: break-word; 
+    hyphens: auto;
 }
 
 .tabla-trans th {
@@ -135,8 +106,7 @@ button:active {
     font-weight: 600;
 }
 
-/* === 2. Grafo, Pila y DI (Visualización Limpia) === */
-
+/* Grafo, Pila y DI */
 .contenido {
     display: flex;
     gap: 20px;
@@ -170,149 +140,231 @@ button:active {
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-/* Pila - Utilizaremos el azul primario para los elementos */
+/* 2. ENCABEZADO (REDESIGNADO Y RESPONSIVE) */
+
+.institucional-header {
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e0e0e0;
+    background-color: transparent;
+}
+
+.header-content-main {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 20px;
+    margin-bottom: 10px;
+}
+
+.header-logo img {
+    width: 80px;
+    height: auto;
+    flex-shrink: 0;
+    display: block;
+}
+
+.header-titles h2 {
+    font-size: 1.6em;
+    color: #003366;
+    text-align: left;
+    margin: 0 0 5px 0;
+}
+
+.header-titles h3 {
+    font-size: 1.1em;
+    color: #0056b3;
+    text-align: left;
+    margin: 0;
+}
+
+.institucional-texto {
+    padding: 0 20px;
+}
+
+.institucional-texto p {
+    font-size: 0.85em;
+    margin: 2px 0;
+    color: #555;
+    line-height: 1.4;
+}
+.institucional-texto p strong {
+    color: #000;
+}
+
+/* 3. ESTILOS JFLAP PARA GRAFO (SVG) */
+
+circle.estado {
+  fill: #fff8b3; 
+  stroke: #333;
+  stroke-width: 2;
+  transition: fill 0.3s ease, stroke 0.3s ease, stroke-width 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+}
+
+circle.estado.estado-final {
+  stroke: #333;
+  stroke-width: 4;
+}
+
+circle.estado.activo {
+  fill: #8f9e6d; 
+  stroke: #333;
+  stroke-width: 3;
+  box-shadow: 0 0 10px rgba(143, 158, 109, 0.8);
+}
+
+path, line {
+    stroke: #333;
+    stroke-width: 2;
+    transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+path.activa, line.activa {
+  stroke: #ff9900;
+  stroke-width: 4;
+  animation: mover-flecha 0.5s linear infinite;
+}
+
+.trans-label {
+    font-size: 14px;
+    fill: #555;
+    font-weight: 500;
+}
+
+/* Pila */
 .pila-elemento {
-  width: 50px; /* Aumentamos un poco el tamaño */
+  width: 50px;
   height: 50px;
   margin: 5px auto;
-  background-color: #0066cc; /* Color Primario Azul */
-  border: 2px solid #003366;
-  border-radius: 8px; /* Bordes un poco más definidos */
+  background-color: #999;
+  border: 2px solid #555;
+  border-radius: 8px;
   color: white;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Transición fluida */
   transition: transform 0.3s ease-out, opacity 0.3s ease-out, background-color 0.3s; 
 }
-.pila-elemento:hover {
-    background-color: #004c99;
+
+
+/* 4. RECURSOS DEL PROYECTO */
+
+.recursos-panel {
+    background-color: #f7f9fc;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Animación PUSH/POP: Se mantienen las animaciones originales por ser fluidas */
-@keyframes pushIn {
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-@keyframes popOut {
-  to {
-    transform: translateY(40px);
-    opacity: 0;
-  }
+.recursos-panel h3 {
+    color: #0066cc;
+    font-size: 1.5em;
+    margin-bottom: 10px;
 }
 
-/* === 3. Nodos del Grafo (Limpios y Azules) === */
-
-/* Estados (círculos) del grafo */
-circle.estado {
-  fill: #ffffff;
-  stroke: #0066cc; /* Borde azul */
-  stroke-width: 2;
-  transition: fill 0.25s ease, stroke 0.25s ease, stroke-width 0.25s ease;
-}
-circle.estado.final {
-  stroke: #003366; /* Borde más oscuro para final */
-  stroke-width: 3;
-}
-circle.estado.activo {
-  fill: #cfe8ff; /* Azul muy suave al estar activo */
-  stroke: #0066cc;
-  stroke-width: 4; /* Borde más grueso para activo */
-  box-shadow: 0 0 10px rgba(0, 102, 204, 0.6); /* Sombra de activación */
+.recursos-panel p {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 0.9em;
 }
 
-/* Transiciones animadas del grafo */
-path.activa, line.activa {
-  stroke: #ff9900; /* Naranja/Amarillo para la activación del trazado */
-  stroke-width: 4; /* Trazado más grueso */
-  animation: mover-flecha 0.8s linear infinite; /* Animación más rápida */
-}
-/* Animación: puntos recorren la línea (fluida) */
-@keyframes mover-flecha {
-  0% {
-    stroke-dasharray: 10;
-    stroke-dashoffset: 0;
-  }
-  100% {
-    stroke-dasharray: 10;
-    stroke-dashoffset: -30; /* Incrementamos el offset para mayor fluidez */
-  }
+.gradient-button {
+    /* Estilo del botón de la captura (Azul a Verde) */
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1em;
+    
+    /* Gradiente de fondo */
+    background: linear-gradient(90deg, #0056b3 0%, #00a86b 100%);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* === 4. Elementos Estéticos (Circuit-Nodes) === */
-/* Reemplazamos los estilos complejos con un diseño limpio basado en la paleta */
-
-.circuit-container {
-    /* Mantenemos el posicionamiento para no romper la función JS */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    pointer-events: none;
-    overflow: hidden;
+.gradient-button:hover {
+    background: linear-gradient(90deg, #003366 0%, #008040 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-.circuit-node {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: #0066cc; /* Azul Primario */
-  border: 1px solid #003366;
-  border-radius: 50%;
-  box-shadow: 0 0 6px rgba(0, 102, 204, 0.7);
-  animation: destelloFluido 2s ease-in-out infinite;
-  transform: scale(1); /* Simplificamos la transformación */
-}
 
-.circuit-connection {
-  position: absolute;
-  height: 1px; /* Líneas muy finas */
-  background-color: rgba(0, 102, 204, 0.4);
-  box-shadow: 0 0 3px rgba(0, 102, 204, 0.3);
-  transform-origin: left center;
-  z-index: -1;
-  pointer-events: none;
-  animation: pulsoConexionFluido 4s ease-in-out infinite;
-}
+/* 5. MEDIA QUERIES (RESPONSIVE DESIGN) */
 
-/* Animaciones fluidas para los elementos estéticos */
-@keyframes destelloFluido {
-  0%, 100% {
-    opacity: 0.8;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
-    box-shadow: 0 0 10px rgba(0, 102, 204, 1);
-  }
-}
+@media (max-width: 768px) {
+    
+    .panel {
+        flex-direction: column; 
+        align-items: stretch;
+        gap: 10px;
+    }
 
-@keyframes pulsoConexionFluido {
-  0%, 100% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
+    .entrada {
+        flex-direction: column; 
+        align-items: stretch;
+    }
 
-/* Eliminamos todas las animaciones complejas de flotación y rotación para limpieza */
-.node1, .node2, .node3, .node4, .node5, .node6,
-.node7, .node8, .node9, .node10, .node11, .node12 {
-  animation: destelloFluido 2s ease-in-out infinite !important;
-}
+    #resultado {
+        min-width: 100%;
+        margin-top: 10px;
+    }
 
-/* === 5. Estilos UMG (Ajuste de Color) === */
-.institucional-texto h2 {
-  color: #cc0000; /* Un rojo más clásico o azul, lo ajustamos al tema: #003366 */
-  color: #003366; 
-  letter-spacing: 0.3px;
+    .gradient-button {
+        display: block; /* El botón ocupa todo el ancho */
+    }
+    
+    /* Encabezado */
+    .header-content-main {
+        flex-direction: column; 
+        align-items: center;
+        text-align: center;
+    }
+    
+    .header-titles h2, .header-titles h3 {
+        text-align: center; 
+        font-size: 1.2em;
+    }
+    
+    .institucional-texto p {
+        font-size: 0.75em;
+    }
+    
+    .header-logo img {
+        width: 60px; 
+    }
+
+    /* Tabla de Transiciones - Reducción de fuente en móvil */
+    .tabla-trans th, .tabla-trans td {
+        font-size: 0.75em; 
+        padding: 8px 5px;
+    }
+
+    /* Simulación (Grafo y Pila) */
+    .contenido {
+        flex-direction: column; 
+        gap: 10px;
+    }
+
+    .pila-container {
+        width: 100%; 
+        max-width: 200px; 
+        margin: 0 auto;
+    }
+
+    .grafo {
+        overflow-x: auto;
+        padding: 10px;
+    }
+    
+    #automata {
+        min-width: 900px; 
+        height: auto;
+    }
 }
-.institucional-texto h3 {
-  color: #006

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,21 +8,31 @@
   <title>Autómata de Pila Animado</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <div class="container">
     <div class="institucional">
       <div class="institucional-header">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/Escudo_de_la_universidad_Mariano_G%C3%A1lvez_Guatemala.svg" alt="Logo Universidad Mariano Gálvez" class="umg-logo">
+        <div class="header-content-main">
+          <div class="header-logo">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/1/15/Escudo_de_la_universidad_Mariano_G%C3%A1lvez_Guatemala.svg"
+              alt="Logo Universidad Mariano Gálvez" class="umg-logo">
+          </div>
+          <div class="header-titles">
+            <h2>UNIVERSIDAD MARIANO GÁLVEZ DE GUATEMALA</h2>
+            <h3>FACULTAD DE INGENIERÍA EN SISTEMAS</h3>
+          </div>
+        </div>
         <div class="institucional-texto">
-          <h2>UNIVERSIDAD MARIANO GÁLVEZ DE GUATEMALA</h2>
-          <h3>FACULTAD DE INGENIERÍA EN SISTEMAS</h3>
           <p><strong>INGENIERO:</strong> HECTOR A. MACZ</p>
           <p><strong>CURSO:</strong> AUTÓMATAS Y LENGUAJES FORMALES</p>
           <p><strong>CICLO:</strong> VI</p>
           <p><strong>PROYECTO:</strong> Simulación de máquinas abstractas en entorno web — Autómatas con pila (PDA)</p>
-          <p><strong>Ejercicio:</strong> 1. L = { 1* 0^n 1^m 1^{2n} 0^m | n ≥ 1, m ≥ 1 }</p>
-          <p><strong>ALUMNO:</strong> Steven Gianni Alexander Reyes Riveiro &nbsp;&nbsp; <strong>CARNÉ No.:</strong> 0902-22-20698</p>
-          <p><strong>Lugar y fecha:</strong> Cobán, Alta Verapaz, 07 de noviembre del 2025</p>
+          <p><strong>EJERCICIO:</strong> 1. L = {1* 0^n 1^m 1^{2n} 0^m | n ≥ 1, m ≥ 1 }</p>
+          <p><strong>ALUMNO:</strong> Steven Gianni Alexander Reyes Riveiro &nbsp;&nbsp; <strong>CARNÉ No:</strong>
+            0902-22-20698</p>
+          <p><strong>LUGAR Y FECHA:</strong> Cobán, Alta Verapaz, 09 de noviembre del 2025</p>
         </div>
       </div>
     </div>
@@ -31,96 +42,158 @@
     <div class="panel">
       <div class="entrada">
         <label>Ingrese la cadena (w):</label>
-        <input type="text" id="cadena" placeholder="Ejemplo: 10011111100">
+        <input type="text" id="cadena" placeholder="Ejemplo: 100111110">
         <button onclick="evaluarCadena()">Evaluar</button>
       </div>
       <div id="resultado"></div>
     </div>
 
     <div class="descripcion">
-      <h3>📘 Descripción formal del Autómata (Séptupla)</h3>
+      <h3>Descripción formal del Autómata (séxtupla)</h3>
       <p>
-        <strong>M = (Q, Σ, Γ, δ, q0, Z, F)</strong><br>
-        Q = {q0, q1, q2, q3, q4, qf}<br>
+        <strong>M = (Σ, Q, Γ, δ, q0, q4, Z)</strong><br>
         Σ = {0, 1}<br>
-        Γ = {A, B, Z}<br>
+        Q = {q0, q1, q2, q3, q4}<br>
+        Γ = {n, m, Z}<br>
         q0 = Estado inicial<br>
+        q4 = Estado final<br>
         Z = Símbolo inicial de la pila<br>
-        F = {qf}
       </p>
-      <h4>Tabla de Transiciones δ:</h4>
-      <table class="tabla-trans">
-        <tr><th>Estado</th><th>Entrada</th><th>Tope Pila</th><th>Acción</th><th>Nuevo estado</th></tr>
-        <tr><td>q0</td><td>1</td><td>Z/A/B</td><td>$\lambda$</td><td>q0</td></tr>
-        <tr><td>q0</td><td>0</td><td>Z/A/B</td><td>Push(A)</td><td>q1</td></tr>
-        <tr><td>q1</td><td>0</td><td>A/Z</td><td>Push(A)</td><td>q1</td></tr>
-        <tr><td>q1</td><td>1</td><td>A/Z</td><td>Push(B)</td><td>q2</td></tr>
-        <tr><td>q2</td><td>1</td><td>B/Z</td><td>Push(B)</td><td>q2</td></tr>
-        <tr><td>q2</td><td>1</td><td>B/Z</td><td>$\lambda$</td><td>q3</td></tr>
-        <tr><td>q3</td><td>11</td><td>A</td><td>Pop(A)</td><td>q3</td></tr>
-        <tr><td>q3</td><td>0</td><td>B</td><td>Pop(B)</td><td>q4</td></tr>
-        <tr><td>q4</td><td>0</td><td>B</td><td>Pop(B)</td><td>q4</td></tr>
-        <tr><td>q4</td><td>$\lambda$</td><td>Z</td><td>$\lambda$</td><td>qf</td></tr>
-      </table>
+      <h3>δ: Tabla de Transiciones</h3>
+      <div class="tabla-scroll-wrapper">
+        <table class="tabla-trans">
+          <tr>
+            <th>Estado</th>
+            <th>Entrada</th>
+            <th>Tope Pila</th>
+            <th>Acción</th>
+            <th>Nuevo estado</th>
+          </tr>
+          <tr>
+            <td>q0</td>
+            <td>1</td>
+            <td>cualquiera</td>
+            <td>$\lambda$</td>
+            <td>q0</td>
+          </tr>
+          <tr>
+            <td>q0</td>
+            <td>$\lambda$</td>
+            <td>cualquiera</td>
+            <td>$\lambda$</td>
+            <td>q1</td>
+          </tr>
+          <tr>
+            <td>q1</td>
+            <td>0</td>
+            <td>cualquiera</td>
+            <td>Push(nn)</td>
+            <td>q1</td>
+          </tr>
+          <tr>
+            <td>q1</td>
+            <td>1</td>
+            <td>cualquiera</td>
+            <td>Push(m)</td>
+            <td>q2</td>
+          </tr>
+          <tr>
+            <td>q2</td>
+            <td>1</td>
+            <td>n</td>
+            <td>Pop(n)</td>
+            <td>q2</td>
+          </tr>
+          <tr>
+            <td>q2</td>
+            <td>1</td>
+            <td>m/Z</td>
+            <td>Push(m)</td>
+            <td>q2</td>
+          </tr>
+          <tr>
+            <td>q2</td>
+            <td>$\lambda$</td>
+            <td>cualquiera</td>
+            <td>$\lambda$</td>
+            <td>q3</td>
+          </tr>
+          <tr>
+            <td>q3</td>
+            <td>0</td>
+            <td>m</td>
+            <td>Pop(m)</td>
+            <td>q3</td>
+          </tr>
+          <tr>
+            <td>q3</td>
+            <td>$\lambda$</td>
+            <td>Z</td>
+            <td>Pop(Z)</td>
+            <td>q4</td>
+          </tr>
+        </table>
+      </div>
     </div>
+
+    <h3>Simulación del Autómata (Grafo)</h3>
 
     <div class="contenido">
       <div class="grafo">
-        <svg id="automata" width="1000" height="300">
+        <svg id="automata" width="100%" height="400" viewBox="0 0 1000 400">
           <defs>
             <marker id="flecha" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L9,3 z" fill="#000"></path>
+              <path d="M0,0 L0,6 L9,3 z" fill="#333"></path>
             </marker>
           </defs>
 
-          <line x1="10" y1="150" x2="50" y2="150" stroke="#000" stroke-width="2" marker-end="url(#flecha)" />
+          <line x1="10" y1="150" x2="50" y2="150" stroke="#333" stroke-width="2" marker-end="url(#flecha)" />
 
-          <circle id="q0" class="estado" cx="80" cy="150" r="30"></circle>
-          <circle id="q1" class="estado" cx="250" cy="150" r="30"></circle>
-          <circle id="q2" class="estado" cx="420" cy="150" r="30"></circle>
-          <circle id="q3" class="estado" cx="600" cy="150" r="30"></circle>
-          <circle id="q4" class="estado" cx="780" cy="150" r="30"></circle>
-          <circle id="qf" class="estado final" cx="950" cy="150" r="30"></circle>
-          <circle id="qf-inner" cx="950" cy="150" r="22" stroke="black" stroke-width="2" fill="none"></circle>
+          <circle id="q0" class="estado estado-inicial" cx="120" cy="150" r="40"></circle>
+          <circle id="q1" class="estado" cx="350" cy="150" r="40"></circle>
+          <circle id="q2" class="estado" cx="580" cy="100" r="40"></circle>
+          <circle id="q3" class="estado" cx="580" cy="270" r="40"></circle>
+          <circle id="q4" class="estado estado-final" cx="800" cy="270" r="40"></circle>
+          <circle id="q4-inner" cx="800" cy="270" r="32" stroke="#333" stroke-width="2" fill="none"></circle>
 
-          <text x="70" y="155">q0</text>
-          <text x="240" y="155">q1</text>
-          <text x="410" y="155">q2</text>
-          <text x="590" y="155">q3</text>
-          <text x="770" y="155">q4</text>
-          <text x="940" y="155">qf</text>
+          <text x="110" y="155">q0</text>
+          <text x="340" y="155">q1</text>
+          <text x="570" y="105">q2</text>
+          <text x="570" y="275">q3</text>
+          <text x="790" y="275">q4</text>
 
-          <path id="t0" d="M 110 150 Q 160 80 240 120" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
-          <text x="155" y="90">0,λ;A</text>
-          
-          <path id="t1" d="M 280 150 Q 335 80 410 120" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
-          <text x="320" y="90">1,λ;B</text>
+          <path id="t0" d="M 160 150 L 310 150" stroke="#333" stroke-width="2" fill="none" marker-end="url(#flecha)" />
+          <text x="210" y="130" class="trans-label">λ, λ; λ</text>
 
-          <path id="t2" d="M 450 150 Q 520 80 590 120" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
-          <text x="505" y="90">1,λ;λ</text>
-          
-          <path id="t3" d="M 630 150 Q 710 80 780 120" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
-          <text x="690" y="90">0,B;λ</text>
+          <path id="b0" d="M 120 110 A 30 30 0 1 1 121 109" stroke="#333" stroke-width="2" fill="none"
+            marker-end="url(#flecha)" />
+          <text x="80" y="70" class="trans-label">1, λ; λ</text>
 
-          <path id="t4" d="M 810 150 Q 860 80 940 120" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
-          <text x="870" y="90">λ,Z;λ</text>
+          <path id="b1" d="M 350 110 A 30 30 0 1 1 351 109" stroke="#333" stroke-width="2" fill="none"
+            marker-end="url(#flecha)" />
+          <text x="310" y="70" class="trans-label">0, λ; nn</text>
 
-          <path id="b0" d="M 80 120 A 25 25 0 1 1 81 119" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
-          <text x="45" y="80">1,λ;λ</text>
+          <path id="t1" d="M 370 140 Q 420 80 540 85" stroke="#333" stroke-width="2" fill="none"
+            marker-end="url(#flecha)" />
+          <text x="440" y="45" class="trans-label">1, λ; m</text>
 
-          <path id="b1" d="M 250 120 A 25 25 0 1 1 251 119" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
-          <text x="215" y="80">0,λ;A</text>
+          <path id="t2" d="M 580 140 A 100 100 0 0 0 580 230" stroke="#333" stroke-width="2" fill="none"
+            marker-end="url(#flecha)" />
+          <text x="590" y="185" class="trans-label-vertical">λ, λ; λ</text>
 
-          <path id="b2" d="M 420 120 A 25 25 0 1 1 421 119" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
-          <text x="385" y="80">1,λ;B</text>
 
-          <path id="b3" d="M 600 120 A 25 25 0 1 1 601 119" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
-          <text x="560" y="80">11,A;λ</text>
+          <path id="b2" d="M 580 60 A 30 30 0 1 1 581 59" stroke="#333" stroke-width="2" fill="none"
+            marker-end="url(#flecha)" />
+          <text x="530" y="20" class="trans-label">1, m/Z; m | 1, n; λ</text>
 
-          <path id="b4" d="M 780 120 A 25 25 0 1 1 781 119" stroke="#000" stroke-width="2" fill="none" marker-end="url(#flecha)" />
-          <text x="740" y="80">0,B;λ</text>
+          <path id="t3" d="M 620 270 L 760 270" stroke="#333" stroke-width="2" fill="none" marker-end="url(#flecha)" />
+          <text x="680" y="250" class="trans-label">λ, Z; λ</text>
 
-          </svg>
+          <path id="b3" d="M 580 310 A 30 30 0 1 1 581 309" stroke="#333" stroke-width="2" fill="none"
+            marker-end="url(#flecha)" />
+          <text x="530" y="350" class="trans-label">0, m; λ</text>
+
+        </svg>
       </div>
 
       <div class="pila-container">
@@ -129,7 +202,32 @@
       </div>
     </div>
 
-    <div id="di"></div>
+    <div>
+      <h3>
+        <br> Descripcion Instantanea.
+        <div id="di"></div>
+      </h3>
+    </div>
+
+    <div class="recursos-panel">
+      <h3>Recursos del Proyecto</h3>
+      <div>
+        <p>Enlace a Drive con los archivos del proyecto:</p>
+        <a href="https://drive.google.com/drive/folders/1NvkHNK-FdP64bLs0klSQjCtW7chRbrDW?usp=sharing" target="_blank"
+          class="gradient-button">
+          🔗 Pulse aquí para acceder a los archivos del Proyecto en Drive
+        </a>
+      </div>
+
+      <div>
+        <p><br>Enlace al repositorio de github del proyecto:</p>
+        <a href="https://github.com/alex-garra21/proyautomatas.git" target="_blank"
+          class="gradient-button">
+          🔗 Pulse aquí para acceder al repositorio en github del Proyecto
+        </a>
+      </div>
+    </div>
+
   </div>
 
   <div class="circuit-container">
@@ -148,5 +246,7 @@
   </div>
 
   <script src="script.js"></script>
+
 </body>
+
 </html>
